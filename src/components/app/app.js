@@ -1,12 +1,27 @@
 import React from 'react';
-
-import { withBookstoreService } from '../hoc';
-
+import { Switch, Route } from 'react-router-dom'; // роутинг
 import './app.css';
 
-const App = ({ bookstoreService }) => {
-  console.log(bookstoreService.getBooks());
-  return <div>App</div>;
+import { 
+  HomePage, 
+  CartPage
+} from '../pages';
+
+const App = () => {
+  return (
+    <Switch> {/* обработка ошибок */}
+      <Route 
+        path="/" 
+        component={HomePage} 
+        exact />
+
+        <Route 
+        path="/cart" 
+        component={CartPage} />
+
+      <Route render={() => <h2>Page not found</h2>} /> {/* если ни один из Route не сработал */}
+    </Switch>
+  );
 };
 
-export default withBookstoreService()(App);
+export default App;
