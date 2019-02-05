@@ -1,17 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import ErrorBoundry from '../error-boundry';
-import { BookstoreServiceContext } from '../bookstore-service-context';
-import SwapiService from '../../services/bookstore-service';
+import { withBookstoreService } from '../hoc';
 
 import './app.css';
 
-export default class App extends Component {
-  render() {
-    return (
-      <ErrorBoundry> {/* ErrorBoundry обработчик ошибок */}
-        <div>App</div>
-      </ErrorBoundry>
-    );
-  }
-}
+const App = ({ bookstoreService }) => {
+  console.log(bookstoreService.getBooks());
+  return <div>App</div>;
+};
+
+export default withBookstoreService()(App);
