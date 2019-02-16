@@ -10,7 +10,23 @@ import ErrorIndicator from '../error-indicator/error-indicator'
 
 import './book-list.css';
 
-class BookList extends Component {
+// отвечает за отрисовку 
+const BookList = ({ books }) => {
+  return (
+    <ul className="book-list">
+      {
+        books.map((book) => {
+          return (
+            <li key={book.id}><BookListItem book={book} /></li>
+          );
+        })
+      }
+    </ul>
+  )
+};
+
+// отвечает за исключительно за поведение
+class BookListContainer extends Component {
   componentDidMount() {
     this.props.fetchBooks();
   };
@@ -34,6 +50,8 @@ class BookList extends Component {
         }
       </ul>
     )
+
+    return <BookList books={books} />;
   }
 };
 
@@ -52,4 +70,4 @@ const mapDispatchToProps = (dispatch, { bookstoreService }) => {
 export default compose(
   withBookstoreService(),
   connect(mapStateToProps, mapDispatchToProps)
-)(BookList);
+)(BookListContainer);
