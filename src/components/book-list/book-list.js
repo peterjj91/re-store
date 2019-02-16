@@ -59,7 +59,7 @@ class BookListContainer extends Component {
       </ul>
     )
 
-    return <BookList books={books} onAddedToCart={onAddedToCart} />;
+    return <BookList books={books} />;
   }
 };
 
